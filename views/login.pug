@@ -1,0 +1,17 @@
+extends base
+
+block append head
+
+block content
+    main.main
+        .login-form
+            h2.heading-secondary.ma-bt-lg 請輸入姓名與身分證字號
+            form.form.form--login
+                .form__group
+                    label.form__label(for='name') 姓名
+                    input#name.form__input(type='text', placeholder='王小明', required)
+                .form__group.ma-bt-md
+                    label.form__label(for='password') 身分證字號
+                    input#password.form__input(type='password', placeholder='••••••••', required, minlength='10')
+                .form__group
+                    button.btn.btn--green Login
