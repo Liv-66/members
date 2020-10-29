@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const passport = require("passport");
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/userModel');
 
@@ -32,4 +33,9 @@ exports.signup = catchAsync(async (req, res, next) => {
   });
   createSendToken(newUser, 201, res);
 });
+
+exports.login = passport.authenticate("local", {
+    successRedirect: "/account",
+    failureRedirect: "failedLogin",
+  })
 

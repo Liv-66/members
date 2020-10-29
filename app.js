@@ -25,7 +25,7 @@ app.use(
     limit: "10kb",
   })
 );
-// app.use(cookieParser());
+app.use(cookieParser());
 
 usePassport(app);
 
