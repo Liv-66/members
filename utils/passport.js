@@ -23,10 +23,11 @@ module.exports = (app) => {
     )
   );
 
-  passport.serializeUser((user, done) => {
+  passport.serializeUser(async(user, done) => {
     done(null, user.id);
+
   });
-  passport.deserializeUser(async (id, done) => {
+  passport.deserializeUser(async(id, done) => {
     await User.findById(id, (err, user) => {
       done(err, user);
     });

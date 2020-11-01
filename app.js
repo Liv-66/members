@@ -1,15 +1,16 @@
 const path = require("path");
 const express = require("express");
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 const session = require("express-session");
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
+const morgan = require("morgan");
 const usePassport = require("./utils/passport");
 const userRouter = require("./routes/userRouter");
 
 const app = express();
 app.set("view engine", "pug");
 app.use(express.static(path.join(__dirname, "public")));
-
+app.use(morgan('dev'));
 
 app.use(
   session({
