@@ -18,11 +18,9 @@ if (loninForm) {
         window.setTimeout(() => {
           location.assign("/account");
         }, 1000);
-        console.log(response);
       })
       .catch((error) => {
-        showAlert("error", "錯誤");
-        console.log(error);
+        showAlert("error", "姓名或身分證錯誤");
       });
   });
 }

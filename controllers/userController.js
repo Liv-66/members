@@ -34,6 +34,10 @@ exports.signup = catchAsync(async (req, res, next) => {
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
+    job: req.body.job,
+    address: req.body.address,
+    education: req.body.education,
+    phone: req.body.phone,
   });
   createSendToken(newUser, 201, res);
 });
