@@ -4,10 +4,8 @@ const userController = require("../controllers/userController");
 const router = express.Router();
 
 router.post("/signup", userController.signup);
-
-
 router.post("/login", userController.login);
-
+router.patch("/update", userController.protect, userController.updade);
 
 router.get("/failedLogin", (req, res, next) => {
   res.send("Failed login!");

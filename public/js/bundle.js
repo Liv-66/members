@@ -8685,14 +8685,44 @@ if (loninForm) {
       name: name,
       password: password
     }).then(function (response) {
-      (0, _alert.showAlert)('success', 'Logged In Successfully!');
+      (0, _alert.showAlert)("success", "登入成功！");
       window.setTimeout(function () {
-        location.assign('/account');
+        location.assign("/account");
       }, 1000);
       console.log(response);
     }).catch(function (error) {
-      (0, _alert.showAlert)('error', '錯誤');
+      (0, _alert.showAlert)("error", "錯誤");
       console.log(error);
+    });
+  });
+}
+
+if (settingForm) {
+  settingForm.addEventListener("submit", function (el) {
+    el.preventDefault();
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    var phone = document.getElementById("phone").value;
+    var address = document.getElementById("address").value;
+    var job = document.getElementById("job").value;
+    var education = document.getElementById("education").value;
+
+    _axios.default.patch("/users/update", {
+      name: name,
+      email: email,
+      phone: phone,
+      address: address,
+      job: job,
+      education: education
+    }).then(function (res) {
+      (0, _alert.showAlert)("success", "更新成功！");
+      window.setTimeout(function () {
+        location.reload(true);
+      }, 1000);
+    }).catch(function (error) {
+      if (error.message = "Request failed with status code 500") {
+        (0, _alert.showAlert)("error", "E-mail格式錯誤");
+      } else (0, _alert.showAlert)("error", error);
     });
   });
 }

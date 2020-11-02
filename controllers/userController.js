@@ -1,3 +1,4 @@
+const { promisify } = require("util");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const catchAsync = require("../utils/catchAsync");
@@ -48,22 +49,35 @@ exports.login = catchAsync(async (req, res, next) => {
   createSendToken(user, 200, res);
 });
 
-exports.isLogedIn = async (req, res, next) => {
-  try {
-    if (req.cookies.jwt) {
-      const decoded = await jwt.verify(
-        req.cookies.jwt,
-        "process.env.JWT_SECRET"
-      );
-      const currentUser = await User.findById(decoded.id);
-      if (!currentUser) return next();
-
-      // Pug => if user
-      res.locals.user = currentUser;
-      return next();
-    }
-  } catch (err) {
-    return next();
+exports.protect = catchAsync(async (req, res, next) => {
+  let token;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
+    token = req.headers.authorization.split(" ")[1];
+  } else if (req.cookies.jwt) {
+    token = req.cookies.jwt;
   }
+  if (!token) return next(new AppError("請登入", 401));
+
+  const decoded = await promisify(jwt.verify)(token, "process.env.JWT_SECRET");
+  const currentUser = await User.findById(decoded.id);
+  if (!currentUser) return next(new AppError("查無資料", 401));
+
+  req.user = currentUser;
+  res.locals.user = currentUser;
   next();
-};
+});
+
+exports.updade = catchAsync(async (req, res, next) => {
+  const user = await User.findByIdAndUpdate(req.user.id, req.body, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+  res.status(200).json({
+    status: "success",
+    data: user,
+  });
+});
