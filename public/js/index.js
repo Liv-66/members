@@ -16,7 +16,7 @@ if (loninForm) {
       .then(function (response) {
         showAlert('success', 'Logged In Successfully!');
         window.setTimeout(() => {
-          location.assign('/users/account');
+          location.assign('/account');
         }, 1000);
         console.log(response);
 

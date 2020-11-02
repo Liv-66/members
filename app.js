@@ -6,19 +6,20 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const usePassport = require("./utils/passport");
 const userRouter = require("./routes/userRouter");
+const viewRouter = require("./routes/viewRouter");
 
 const app = express();
 app.set("view engine", "pug");
 app.use(express.static(path.join(__dirname, "public")));
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 
-app.use(
-  session({
-    secret: "twcpa-members",
-    resave: false,
-    saveUninitialized: true,
-  })
-);
+// app.use(
+//   session({
+//     secret: "twcpa-members",
+//     resave: false,
+//     saveUninitialized: true,
+//   })
+// );
 app.use(express.json({ limit: "10kb" }));
 app.use(
   express.urlencoded({
@@ -28,8 +29,9 @@ app.use(
 );
 app.use(cookieParser());
 
-usePassport(app);
+// usePassport(app);
 
 app.use("/users", userRouter);
+app.use("/", viewRouter);
 
 module.exports = app;

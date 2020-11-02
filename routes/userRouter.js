@@ -5,17 +5,10 @@ const router = express.Router();
 
 router.post("/signup", userController.signup);
 
-router.get("/login", (req, res) => {
-  res.render("login");
-});
-router.post("/login", passport.authenticate("local"), (req, res) => {
-  res.redirect("/users/account");
-  console.log(req.user);
-});
 
-router.get("/account", (req, res, next) => {
-  res.render("account");
-});
+router.post("/login", userController.login);
+
+
 router.get("/failedLogin", (req, res, next) => {
   res.send("Failed login!");
 });

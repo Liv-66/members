@@ -16,22 +16,22 @@ block content
                     form.form.form-user-data
                         .form__group
                             label.form__label(for='name') 姓名
-                            input#name.form__input(type='text', value=`姓名`, required)
+                            input#name.form__input(type='text', value=`${user.name}`, required)
                         .form__group.ma-bt-md
                             label.form__label(for='email') Email
-                            input#email.form__input(type='email', value=`Email`, required)
+                            input#email.form__input(type='email', value=`${user.email}`, required)
                         .form__group.ma-bt-md
                             label.form__label(for='phone') 聯絡電話
-                            input#phone.form__input(type='email', value=`聯絡電話`, required)
+                            input#phone.form__input(type='email', value=`${user.phone}`, required)
                         .form__group.ma-bt-md
                             label.form__label(for='address') 通訊地址
-                            input#address.form__input(type='text', value=`通訊地址`)
+                            input#address.form__input(type='text', value=`${user.address}`)
                         .form__group.ma-bt-md
                             label.form__label(for='job') 現職
-                            input#job.form__input(type='text', value=`現職`)
+                            input#job.form__input(type='text', value=`${user.job}`)
                         .form__group.ma-bt-md
                             label.form__label(for='education') 學歷
-                            input#education.form__input(type='text', value=`學歷`)
+                            input#education.form__input(type='text', value=`${user.education}`)
                         
 
                         .form__group.right
