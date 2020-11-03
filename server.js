@@ -12,4 +12,4 @@ mongoose
   })
   .then(() => console.log("連接成功：會員"));
 
-const server = app.listen(process.env.PORT || 3000, "127.0.0.1");
+const server = app.listen(process.env.port || 3000, "127.0.0.1");
